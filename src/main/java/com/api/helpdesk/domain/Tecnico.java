@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.api.helpdesk.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -13,6 +14,7 @@ public class Tecnico extends Pessoa{
 	private static final long serialVersionUID = 1L;
 	
 	//tecnico e o nome do campo que esta em chamado, referenciando o relacionamento com essa tabela
+	@JsonIgnore
 	@OneToMany(mappedBy = "tecnico")
 	private List<Chamado> chamados = new ArrayList<>();
 
