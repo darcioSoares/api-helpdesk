@@ -7,9 +7,9 @@ Uma API em java, utilizando spring boot e mysql.
 ```
 ### O que tera ?
 ```
-* CRUD de cadastro de tecnico
-* CRUD de Cliente
-* CRUD de Ordem de serviços
+* CRUD de tecnico
+* CRUD de cliente
+* CRUD de ordem de serviço
 * Relacionamento de cliente e serviço, serviço e tecnico
 ```
 ### Em Desenvolvimento...
