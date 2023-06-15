@@ -18,6 +18,8 @@ import com.api.helpdesk.domain.Tecnico;
 import com.api.helpdesk.domain.dtos.TecnicoDTO;
 import com.api.helpdesk.services.TecnicoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
@@ -40,7 +42,7 @@ public class TecnicoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objDTO){
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO){
 		Tecnico newObj = tecnicoService.create(objDTO);
 		//created espera uma uri, comm esta criando uma uri com id do usuario criado
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
