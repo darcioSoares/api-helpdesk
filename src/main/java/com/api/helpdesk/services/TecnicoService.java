@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.api.helpdesk.domain.Pessoa;
@@ -51,6 +52,14 @@ public class TecnicoService {
 		return tecnicoRepository.save(oldObj);
 	}
 	
+	public void delete(Integer id) {
+		Tecnico obj = findById(id);
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Tecnico possui ordens de serviço, não pode ser Deletado");
+		}
+		tecnicoRepository.deleteById(id);
+	}
+	
 	private void validarCpfEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
 		//estou validando se o cpf já existe, se os ID são compativeis para reutilizar o metodo em update tecnico
@@ -63,6 +72,8 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Email já Cadastrado");
 		}
 	}
+
+	
 
 
 	
