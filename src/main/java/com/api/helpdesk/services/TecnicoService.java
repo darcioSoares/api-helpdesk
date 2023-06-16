@@ -14,6 +14,8 @@ import com.api.helpdesk.repositories.TecnicoRepository;
 import com.api.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.api.helpdesk.services.exceptions.ObjectnotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TecnicoService {
 
@@ -41,6 +43,14 @@ public class TecnicoService {
 		return tecnicoRepository.save(newObj);
 	}
 	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico oldObj = findById(id);
+		validarCpfEmail(objDTO);
+		oldObj = new Tecnico(objDTO);
+		return tecnicoRepository.save(oldObj);
+	}
+	
 	private void validarCpfEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
 		//estou validando se o cpf já existe, se os ID são compativeis para reutilizar o metodo em update tecnico
@@ -53,6 +63,8 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Email já Cadastrado");
 		}
 	}
+
+
 	
 	
 }
