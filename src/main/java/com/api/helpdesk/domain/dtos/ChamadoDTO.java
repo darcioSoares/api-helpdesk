@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 public class ChamadoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -18,11 +19,17 @@ public class ChamadoDTO implements Serializable{
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;	
+	@NotNull(message = "O campo Prioridade é requerido")
 	private Integer prioridade;
+	@NotNull(message = "O campo Status é requerido")
 	private Integer status;
+	@NotNull(message = "O campo Titulo é requerido")
 	private String titulo;
+	@NotNull(message = "O campo Observação é requerido")
 	private String observacao;		
+	@NotNull(message = "O campo Tecnico é requerido")
 	private Integer tecnico;
+	@NotNull(message = "O campo Cliente é requerido")
 	private Integer cliente;
 	private String nomeTecnico;
 	private String nomeCliente;
